@@ -1,0 +1,49 @@
+.cellcard {
+    display: flex;
+    background-color: rgb(136, 80, 83);
+    min-width: 60px;
+    min-height: 120px;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 4px;
+    color: #fff;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+  
+  .cellcard:not(first-child) {
+    margin-left: 5px;
+  }
+  
+  .cellcard:focus {
+    outline: none;
+  }
+  
+  .cellcard.hidden {
+    background-color: rgb(91, 66, 69);
+  }
+  .cellcard.hidden:hover {
+    background-color: rgb(111, 76, 79);
+  }
+  
+  /* Flagged incorrectly*/
+  .cellcard.is-flag:not(.is-mine):not(.hidden) {
+    background-color: rgb(175, 62, 77);
+  }
+  
+  /* Flagged correctly */
+  .cellcard.is-flag.is-mine:not(.hidden) {
+    background-color: #4f8755;
+  }
+  
+  /* Clicked on a mine*/
+  .cellcard.is-mine.is-clicked {
+    background-color: rgb(175, 62, 77);
+  }
+  
+  /* Empty revealed cells*/
+  .cellcard.is-empty:not(.hidden):not(.is-mine):not(.is-flagged) {
+    background-color: rgb(121, 65, 68);
+  }
+  

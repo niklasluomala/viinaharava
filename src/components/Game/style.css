@@ -1,0 +1,8 @@
+.game {
+    height: 300 vh;
+    margin: 0 auto;
+  }
+
+.control-buttons {
+  vertical-align: bottom;
+}
