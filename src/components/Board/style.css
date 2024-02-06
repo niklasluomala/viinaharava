@@ -45,7 +45,7 @@
   .ruleset {
     display: flex;
     flex-direction: column;
-    max-width: 600px;
+    max-width: 80 vw;
     align-self: center;
   }
   

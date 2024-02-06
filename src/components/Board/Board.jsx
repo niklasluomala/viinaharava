@@ -233,8 +233,6 @@ class Board extends React.Component {
       const rowCells = row.map(gridCell => (
         <Cell
           key={gridCell.y * row.length + gridCell.x}
-          onClick={() => this.handleLeftClick(gridCell.y, gridCell.x)}
-          cMenu={e => this.handleRightClick(e, gridCell.y, gridCell.x)}
           value={gridCell}
         />
       ));
@@ -247,7 +245,7 @@ class Board extends React.Component {
     const grid = this.state.grid;
 
     // spades, clubs, diamonds, hearts
-    const suites = ["S", "C", "D", "H"]
+    const suites = ["♠️", "♣️", "♦️", "♥️"]
 
     // card values from A to King
     const values = ["A", "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K"]
@@ -271,11 +269,11 @@ class Board extends React.Component {
                 this.state.mines.push(this.state.cards.splice(cards.findIndex(card => card.match(/[(9)(10)]/g)), 1));
             }
             else if (cell.n === 1) {
-                this.state.ones.push(this.state.cards.splice(cards.findIndex(card => card.match(/[AJQK]/g)),1))
+                this.state.ones.push(this.state.cards.splice(cards.findIndex(card => card.match(/[AJ]/g)),1))
             } else if (cell.n === 2) {
-                this.state.twos.push(this.state.cards.splice(cards.findIndex(card => card.match(/[2]/g)),1))
+                this.state.twos.push(this.state.cards.splice(cards.findIndex(card => card.match(/[2Q]/g)),1))
             } else if (cell.n === 3) {
-                this.state.threes.push(this.state.cards.splice(cards.findIndex(card => card.match(/[3]/g)),1))
+                this.state.threes.push(this.state.cards.splice(cards.findIndex(card => card.match(/[3K]/g)),1))
             } else if (cell.n === 4) {
                 this.state.fours.push(this.state.cards.splice(cards.findIndex(card => card.match(/[4]/g)),1))
             } else if (cell.n === 5) {
@@ -307,7 +305,7 @@ class Board extends React.Component {
 
   renderCards(name, className, arr) {
     let cards = arr.map(card => (
-        <img class='card' src={'cards/' + card + '.svg'}/>
+        <span>{card} </span>
     ));
     return (
       <div className={className}>
@@ -377,7 +375,7 @@ class Board extends React.Component {
   }
 
   getCardById(id) {
-    return '<img class=\'card\' src=\'' + id + '.svg\'';
+    return '<p>' + id + '</p>';
   }
 }
 
@@ -387,7 +385,7 @@ class GridCell {
     this.y = y;
     this.n = 0;
     this.isMine = isMine;
-    this.isRevealed = false;
+    this.isRevealed = true;
     this.isFlagged = false;
     this.isUnknown = false;
     this.isClicked = false;

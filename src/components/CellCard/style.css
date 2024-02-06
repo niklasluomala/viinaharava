@@ -1,13 +1,13 @@
 .cellcard {
     display: flex;
-    background-color: rgb(136, 80, 83);
-    min-width: 60px;
-    min-height: 120px;
+    background-color: #fff;
+    min-width: 40px;
+    min-height: 40px;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     border-radius: 4px;
-    color: #fff;
+    color: #000;
     font-weight: 600;
     transition: background-color 0.2s;
   }

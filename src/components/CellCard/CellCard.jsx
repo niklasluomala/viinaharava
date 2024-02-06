@@ -22,13 +22,7 @@ class CellCard extends React.Component {
 
   render() {
     const className =
-      "cellcard" +
-      (this.props.value.isRevealed ? "" : " hidden") +
-      (this.props.value.isMine ? " is-mine" : "") +
-      (this.props.value.isClicked ? " is-clicked" : "") +
-      (this.props.value.isEmpty ? " is-empty" : "") +
-      (this.props.value.isUnknown ? " is-unknown" : "") +
-      (this.props.value.isFlagged ? " is-flag" : "");
+      "cellcard"
 
     return (
       <div
@@ -37,10 +31,7 @@ class CellCard extends React.Component {
         onContextMenu={this.props.cMenu}
         card={this.props.card}
       >
-        <img
-          className='card'
-          src={'cards/' + this.props.card + '.svg'}
-        />
+        <p>{this.props.card}</p>
       </div>
     );
   }

@@ -10,9 +10,9 @@ class Game extends React.Component {
     this.boardElement = React.createRef();
 
     this.state = {
-      height: 8,
-      width: 8,
-      mines: 10,
+      height: 6,
+      width: 6,
+      mines: 6,
       gameStatus: 0,
       cards: [],
       minesCards: [],
@@ -65,27 +65,6 @@ class Game extends React.Component {
         />
         <div className="control-buttons">
           <button onClick={this.restartGame}>Restart</button>
-
-          <form>
-            <label>Height</label>
-            <input
-              type="number"
-              value={this.state.height}
-              onChange={this.handleChangeHeight}
-            />
-            <label>Width</label>
-            <input
-              type="number"
-              value={this.state.width}
-              onChange={this.handleChangeWidth}
-            />
-            <label>Mines</label>
-            <input
-              type="number"
-              value={this.state.mines}
-              onChange={this.handleChangeMines}
-            />
-          </form>
         </div>
       </div>
     );
