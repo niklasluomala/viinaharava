@@ -1,16 +1,26 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import Game from './components/Game/Game.jsx'
+import RulesMarkdown from './rules.md'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [rules, setRules] = useState("")
+
+  useEffect(() => {
+    fetch(RulesMarkdown)
+      .then(response => response.text())
+      .then(text => setRules(text))
+  }, [])
 
   return (
     <>
-      <h1>Viinaharava 0.1</h1>
       <div>
+        <ReactMarkdown remarkPlugins={remarkGfm} children={rules}></ReactMarkdown>
         <Game />
       </div>
     </>

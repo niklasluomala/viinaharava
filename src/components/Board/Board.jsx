@@ -24,7 +24,8 @@ class Board extends React.Component {
       sixes: [],
       sevens: [],
       eights: [],
-      empties: []
+      empties: [],
+      gameInSession: false
     };
     return initialState;
   }
@@ -263,30 +264,33 @@ class Board extends React.Component {
         }
     }
 
-    grid.map(row => {
-        row.map(cell => {
-            if (cell.isMine) {
-                this.state.mines.push(this.state.cards.splice(cards.findIndex(card => card.match(/[(9)(10)]/g)), 1));
-            }
-            else if (cell.n === 1) {
-                this.state.ones.push(this.state.cards.splice(cards.findIndex(card => card.match(/[AJ]/g)),1))
-            } else if (cell.n === 2) {
-                this.state.twos.push(this.state.cards.splice(cards.findIndex(card => card.match(/[2Q]/g)),1))
-            } else if (cell.n === 3) {
-                this.state.threes.push(this.state.cards.splice(cards.findIndex(card => card.match(/[3K]/g)),1))
-            } else if (cell.n === 4) {
-                this.state.fours.push(this.state.cards.splice(cards.findIndex(card => card.match(/[4]/g)),1))
-            } else if (cell.n === 5) {
-                this.state.fives.push(this.state.cards.splice(cards.findIndex(card => card.match(/[5]/g)),1))
-            } else if (cell.n === 6) {
-                this.state.sixes.push(this.state.cards.splice(cards.findIndex(card => card.match(/[6]/g)),1))
-            } else if (cell.n === 7) {
-                this.state.sevens.push(this.state.cards.splice(cards.findIndex(card => card.match(/[7]/g)),1))
-            } else if (cell.n === 8) { 
-                this.state.eights.push(this.state.cards.splice(cards.findIndex(card => card.match(/[8]/g)),1))
-            }
+    if (this.state.mines.length === 0) {
+        grid.map(row => {
+            row.map(cell => {
+                if (cell.isMine) {
+                    this.state.mines.push(this.state.cards.splice(cards.findIndex(card => card.match(/[(9)(10)]/g)), 1));
+                } else if (cell.n === 1) {
+                    this.state.ones.push(this.state.cards.splice(cards.findIndex(card => card.match(/[AJ]/g)), 1))
+                } else if (cell.n === 2) {
+                    this.state.twos.push(this.state.cards.splice(cards.findIndex(card => card.match(/[2Q]/g)), 1))
+                } else if (cell.n === 3) {
+                    this.state.threes.push(this.state.cards.splice(cards.findIndex(card => card.match(/[3K]/g)), 1))
+                } else if (cell.n === 4) {
+                    this.state.fours.push(this.state.cards.splice(cards.findIndex(card => card.match(/[4]/g)), 1))
+                } else if (cell.n === 5) {
+                    this.state.fives.push(this.state.cards.splice(cards.findIndex(card => card.match(/[5]/g)), 1))
+                } else if (cell.n === 6) {
+                    this.state.sixes.push(this.state.cards.splice(cards.findIndex(card => card.match(/[6]/g)), 1))
+                } else if (cell.n === 7) {
+                    this.state.sevens.push(this.state.cards.splice(cards.findIndex(card => card.match(/[7]/g)), 1))
+                } else if (cell.n === 8) {
+                    this.state.eights.push(this.state.cards.splice(cards.findIndex(card => card.match(/[8]/g)), 1))
+                } else if (cell.n === 0 && !cell.isMine) {
+                    this.state.empties.push(this.state.cards.splice(cards.findIndex(card => card.match(/[5-8]/g)), 1))
+                }
+            })
         })
-    })
+    }
 
     return grid.map(row => {
         const rowCells = row.map(gridCell => (
@@ -368,7 +372,29 @@ class Board extends React.Component {
         card = this.state.eights.shift();
         this.state.eights.push(card);
     } else if (cell.n === 0 && !cell.isMine) {
-        card = this.state.cards.shift();
+        // check if card is already used
+        let cardIsUsed = false;
+        do {
+            cardIsUsed = false;
+            card = this.state.empties.shift();
+            if (this.state.ones.find(one => one == card)) {
+                cardIsUsed = true;
+            } else if (this.state.twos.find(two => two == card)) {
+                cardIsUsed = true;
+            } else if (this.state.threes.find(three => three == card)) {
+                cardIsUsed = true;
+            } else if (this.state.fours.find(four => four == card)) {
+                cardIsUsed = true;
+            } else if (this.state.fives.find(five => five == card)) {
+                cardIsUsed = true;
+            } else if (this.state.sixes.find(six => six == card)) {
+                cardIsUsed = true;
+            } else if (this.state.sevens.find(seven => seven == card)) {
+                cardIsUsed = true;
+            } else if (this.state.eights.find(eight => eight == card)) {
+                cardIsUsed = true;
+            }      
+        } while (cardIsUsed)
         this.state.empties.push(card);
     }
     return card;

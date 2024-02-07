@@ -27,8 +27,6 @@ class CellCard extends React.Component {
     return (
       <div
         className={className}
-        onClick={this.props.onClick}
-        onContextMenu={this.props.cMenu}
         card={this.props.card}
       >
         <p>{this.props.card}</p>
