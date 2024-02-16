@@ -77,31 +77,3 @@ Mikäli pelilauta todetaan pelaajien toimesta yksimielisesti väärin kasatuksi 
 Pelilaudan ollessa väärin kasattu tai puutteelinen jakaja mitä nöyrimmin inhimillistä virhettään pahoitelkoot ja äärimmäistä tarkkaavaisuutta seuraavaa pelilautaa kasatessa noudattakoot, mikäli pelaajat tämän edelleen jakajaksi kelpuuttavat.
 
 Mikäli epäily pelilaudan kelpoisuudesta osoittautuu aiheettomaksi, tätä epäilleet pelaajat omalla ajallaan miinaharavan säännöt kerratkoot.
-
-## Kiitos
-
-Kiitos testaajille:
-
-Aleksi-Ilari Pelkonen
-
-Juho Ollila
-
-Sofia Antin
-
-Valter Olin
-
-Janne Ranne
-
-Miao Korpelainen
-
-Tiitus Hannula
-
-Veera Ollila
-
-Jeremi Nyyssönen
-
-Marlo Ekberg
-
-Roosa Varjonen
-
-Sini Kylä-Kaila
