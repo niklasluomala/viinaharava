@@ -2,32 +2,6 @@
 
 By [niklasluomala](https://github.com/niklasluomala) & [Loimaranta](https://github.com/Loimaranta)
 
-Kiitos testaajille:
-
-Aleksi-Ilari Pelkonen
-
-Juho Ollila
-
-Sofia Antin
-
-Valter Olin
-
-Janne Ranne
-
-Miao Korpelainen
-
-Tiitus Hannula
-
-Veera Ollila
-
-Jeremi Nyyssönen
-
-Marlo Ekberg
-
-Roosa Varjonen
-
-Sini Kylä-Kaila
-
 *"Pelkkä nimi ei välttämättä ole paras mahdollinen lähtökohta aloittaa juomapelin suunnittelu."*
 
 Albert Einstein kätellessään Abraham Lincolnia

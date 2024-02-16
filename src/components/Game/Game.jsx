@@ -56,6 +56,10 @@ class Game extends React.Component {
     const { height, width, mines, gameStatus } = this.state;
     return (
       <div className="game">
+        <div className="control-buttons">
+          <button onClick={this.restartGame}>Generoi</button>
+        </div>
+        <br />
         <Board
           ref={this.boardElement}
           height={height}
@@ -63,9 +67,6 @@ class Game extends React.Component {
           mines={mines}
           gameStatus={gameStatus}
         />
-        <div className="control-buttons">
-          <button onClick={this.restartGame}>Restart</button>
-        </div>
       </div>
     );
   }
