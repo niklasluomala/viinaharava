@@ -22,7 +22,7 @@ Omavalintaiset juotavat
 
 Järjestä pakka numerojärjestykseen.
 
-Generoi Viinaharava (alla) ja rakenna pelialue sijoittamalla ruutuja vastaavat kortit pelialueelle kuvapuoli alaspäin. Pelaajat eivät saa katsoa pelialueen kasaamista tasapuolisen kilpailuasetelman säilymiseksi.
+Generoi Viinaharava (toisella välilehdellä) ja rakenna pelialue sijoittamalla ruutuja vastaavat kortit pelialueelle kuvapuoli alaspäin. Pelaajat eivät saa katsoa pelialueen kasaamista tasapuolisen kilpailuasetelman säilymiseksi.
 
 Pelaajat selvittävät pelin aloittajan heittämällä noppaa jakajasta alkaen myötäpäivään. Suurimman silmäluvun saanut aloittaa pelin.
 
