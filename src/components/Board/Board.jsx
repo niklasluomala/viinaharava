@@ -286,7 +286,7 @@ class Board extends React.Component {
                 } else if (cell.n === 8) {
                     this.state.eights.push(this.state.cards.splice(cards.findIndex(card => card.match(/[8]/g)), 1))
                 } else if (cell.n === 0 && !cell.isMine) {
-                    this.state.empties.push(this.state.cards.splice(cards.findIndex(card => card.match(/[5-8]/g)), 1))
+                    this.state.empties.push(this.state.cards.splice(cards.findIndex(card => card.match(/[7-8]/g)), 1))
                 }
             })
         })
@@ -311,6 +311,7 @@ class Board extends React.Component {
     let cards = arr.map(card => (
         <span>{card} </span>
     ));
+    if (cards.length == 0) return
     return (
       <div className={className}>
           <span>{name}</span>
