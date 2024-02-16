@@ -11,4 +11,4 @@ Currently, two official plugins are available:
 
 An experimental drinking game of questionable quality. No rules yet.
 
-Minesweeper logic based on [https://codesandbox.io/p/sandbox/react-minesweeper-yin56](https://codesandbox.io/p/sandbox/react-minesweeper-yin56https://).
+Minesweeper logic based on [https://codesandbox.io/p/sandbox/react-minesweeper-yin56](https://codesandbox.io/p/sandbox/react-minesweeper-yin56).
