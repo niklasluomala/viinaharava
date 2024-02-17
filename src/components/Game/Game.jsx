@@ -12,7 +12,7 @@ class Game extends React.Component {
     this.state = {
       height: 6,
       width: 6,
-      mines: 6,
+      mines: 8,
       cards: [],
       minesCards: [],
       ones: [],

@@ -28,7 +28,7 @@ class Board extends React.Component {
   }
 
   // Board utilities
-  createNewBoard(click = null) {
+  createNewBoard() {
     const grid = [];
     const rows = this.props.width;
     const columns = this.props.height;
