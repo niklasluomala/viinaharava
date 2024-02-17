@@ -12,7 +12,6 @@ class Board extends React.Component {
     const initialState = {
       grid: this.createNewBoard(),
       minesCount: this.props.mines,
-      gameStatus: this.props.gameStatus,
       revealedCells: 0,
       cards: [],
       mines: [],
@@ -24,8 +23,7 @@ class Board extends React.Component {
       sixes: [],
       sevens: [],
       eights: [],
-      empties: [],
-      gameInSession: false
+      empties: []
     };
     return initialState;
   }
@@ -36,7 +34,7 @@ class Board extends React.Component {
     const rows = this.props.width;
     const columns = this.props.height;
     const minesCount = this.props.mines;
-    const minesArray = this.getRandomMines(minesCount, columns, rows, click);
+    const minesArray = this.getRandomMines(minesCount, columns, rows);
 
     for (let i = 0; i < columns; ++i) {
       grid.push([]);
@@ -49,14 +47,10 @@ class Board extends React.Component {
     return grid;
   }
 
-  getRandomMines(amount, columns, rows, starter = null) {
+  getRandomMines(amount, columns, rows) {
     const minesArray = [];
     const limit = columns * rows;
     const minesPool = [...Array(limit).keys()];
-
-    if (starter > 0 && starter < limit) {
-      minesPool.splice(starter, 1);
-    }
 
     for (let i = 0; i < amount; ++i) {
       const n = Math.floor(Math.random() * minesPool.length);
@@ -81,18 +75,6 @@ class Board extends React.Component {
     }
 
     grid[y].push(gridCell);
-  }
-
-  revealBoard() {
-    const grid = this.state.grid;
-
-    for (const row of grid) {
-      for (const gridCell of row) {
-        gridCell.isRevealed = true;
-      }
-    }
-
-    this.setState({});
   }
 
   restartBoard() {
@@ -120,110 +102,6 @@ class Board extends React.Component {
     }
 
     return neighbours;
-  }
-
-  revealEmptyNeigbhours(grid, y, x) {
-    const neighbours = [...this.getNeighbours(grid, y, x)];
-    grid[y][x].isFlagged = false;
-    grid[y][x].isRevealed = true;
-
-    while (neighbours.length) {
-      const neighbourGridCell = neighbours.shift();
-
-      if (neighbourGridCell.isRevealed) {
-        continue;
-      }
-      if (neighbourGridCell.isEmpty) {
-        neighbours.push(
-          ...this.getNeighbours(grid, neighbourGridCell.y, neighbourGridCell.x)
-        );
-      }
-
-      neighbourGridCell.isFlagegd = false;
-      neighbourGridCell.isRevealed = true;
-    }
-  }
-
-  checkVictory() {
-    const { height, width, mines } = this.props;
-    const revealed = this.getRevealed();
-
-    if (revealed >= height * width - mines) {
-      this.killBoard("win");
-    }
-  }
-
-  getRevealed = () => {
-    return this.state.grid
-      .reduce((r, v) => {
-        r.push(...v);
-        return r;
-      }, [])
-      .map(v => v.isRevealed)
-      .filter(v => !!v).length;
-  };
-
-  killBoard(type) {
-    const message = type === "lost" ? "You lost." : "You won.";
-
-    this.setState({ gameStatus: message }, () => {
-      this.revealBoard();
-    });
-  }
-
-  // Cell click handlers
-  handleLeftClick(y, x) {
-    this.revealBoard();
-    /*
-    const grid = this.state.grid;
-    const gridCell = grid[y][x];
-
-    gridCell.isClicked = true;
-
-    // Might want to add an "isUnknown" state later
-    if (gridCell.isRevealed || gridCell.isFlagged) {
-      return false;
-    }
-
-    // End game if mine
-    if (gridCell.isMine) {
-      this.killBoard("lost");
-      return false;
-    }
-
-    if (gridCell.isEmpty) {
-      this.revealEmptyNeigbhours(grid, y, x);
-    }
-
-    gridCell.isFlagged = false;
-    gridCell.isRevealed = true;
-
-    this.setState({}, () => {
-      this.checkVictory();
-    });
-    */
-  }
-
-  // Cell right-click handler
-  handleRightClick(e, y, x) {
-    e.preventDefault();
-    const grid = this.state.grid;
-    let minesLeft = this.state.minesCount;
-
-    // Check if already revealed
-    if (grid[y][x].isRevealed) return false;
-
-    if (grid[y][x].isFlagged) {
-      grid[y][x].isFlagged = false;
-      minesLeft++;
-    } else {
-      grid[y][x].isFlagged = true;
-      minesLeft--;
-    }
-
-    this.setState({
-      minesCount: minesLeft
-    });
   }
 
   // Rendering functions
@@ -296,8 +174,6 @@ class Board extends React.Component {
         const rowCells = row.map(gridCell => (
             <CellCard
               key={gridCell.y * row.length + gridCell.x}
-              onClick={() => this.handleLeftClick(gridCell.y, gridCell.x)}
-              cMenu={e => this.handleRightClick(e, gridCell.y, gridCell.x)}
               value={gridCell}
               card={this.getCardForCell(gridCell)}
             />
@@ -400,10 +276,6 @@ class Board extends React.Component {
     }
     return card;
   }
-
-  getCardById(id) {
-    return '<p>' + id + '</p>';
-  }
 }
 
 class GridCell {
@@ -413,9 +285,6 @@ class GridCell {
     this.n = 0;
     this.isMine = isMine;
     this.isRevealed = true;
-    this.isFlagged = false;
-    this.isUnknown = false;
-    this.isClicked = false;
   }
   get isEmpty() {
     return this.n === 0 && !this.isMine;

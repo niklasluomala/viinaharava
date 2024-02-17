@@ -13,7 +13,6 @@ class Game extends React.Component {
       height: 6,
       width: 6,
       mines: 6,
-      gameStatus: 0,
       cards: [],
       minesCards: [],
       ones: [],
@@ -53,7 +52,7 @@ class Game extends React.Component {
   };
 
   render() {
-    const { height, width, mines, gameStatus } = this.state;
+    const { height, width, mines } = this.state;
     return (
       <div className="game">
         <div className="control-buttons">
@@ -65,7 +64,6 @@ class Game extends React.Component {
           height={height}
           width={width}
           mines={mines}
-          gameStatus={gameStatus}
         />
       </div>
     );
