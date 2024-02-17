@@ -25,3 +25,11 @@ Marlo Ekberg
 Roosa Varjonen
 
 Sini Kylä-Kaila
+
+Arttu Saarinen
+
+Jonatan Järvinen
+
+Lauri Koivusalo
+
+Oscar Lancaster
