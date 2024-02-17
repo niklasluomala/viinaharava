@@ -7,11 +7,7 @@ class CellCard extends React.Component {
   getValue() {
     const { value } = this.props;
 
-    console.log(value)
-
-    if (!value.isRevealed) {
-      return this.props.value.isFlagged ? "🚩" : null;
-    } else if (value.isMine) {
+    if (value.isMine) {
       return "💣";
     } else if (value.isEmpty) {
       return "";
@@ -27,7 +23,6 @@ class CellCard extends React.Component {
     return (
       <div
         className={className}
-        card={this.props.card}
       >
         <p>{this.props.card}</p>
       </div>
@@ -40,16 +35,12 @@ const cellItemShape = {
   x: PropTypes.number,
   y: PropTypes.number,
   n: PropTypes.number,
-  isRevealed: PropTypes.bool,
   isMine: PropTypes.bool,
-  isFlagged: PropTypes.bool
 };
 
 CellCard.propTypes = {
   value: PropTypes.objectOf(PropTypes.shape(cellItemShape)),
-  onClick: PropTypes.func,
-  cMenu: PropTypes.func,
-  card: PropTypes.string
+  card: PropTypes.array
 };
 
 export default CellCard;

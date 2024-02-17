@@ -12,7 +12,6 @@ class Board extends React.Component {
     const initialState = {
       grid: this.createNewBoard(),
       minesCount: this.props.mines,
-      revealedCells: 0,
       cards: [],
       mines: [],
       ones: [],
@@ -284,7 +283,6 @@ class GridCell {
     this.y = y;
     this.n = 0;
     this.isMine = isMine;
-    this.isRevealed = true;
   }
   get isEmpty() {
     return this.n === 0 && !this.isMine;
