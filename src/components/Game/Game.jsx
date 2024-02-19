@@ -68,7 +68,7 @@ function Game() {
         return deck
     }
 
-    const determineCardsForGrid = (board, minesCards, ones, twos, threes, fours, fives, sixes, sevens, eights, empties) => {
+    const determineCardsForGrid = (board, cards, minesCards, ones, twos, threes, fours, fives, sixes, sevens, eights, empties) => {
         board.map(row => {
             row.map(cell => {
                 if (cell.isMine) {
@@ -218,7 +218,7 @@ function Game() {
         let eightsDeck = []
         let emptiesDeck = []
 
-        determineCardsForGrid(board, minesDeck, onesDeck, twosDeck, threesDeck, foursDeck, fivesDeck, sixesDeck,
+        determineCardsForGrid(board, deck, minesDeck, onesDeck, twosDeck, threesDeck, foursDeck, fivesDeck, sixesDeck,
             sevensDeck, eightsDeck, emptiesDeck)
         cardifyGrid(board, minesDeck, onesDeck, twosDeck, threesDeck, foursDeck, fivesDeck, sixesDeck,
             sevensDeck, eightsDeck, emptiesDeck)
