@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Board from "../Board/Board.jsx";
+import Board from "../Board/Board.tsx";
 
 import "./style.css";
 
