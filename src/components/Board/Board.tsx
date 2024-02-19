@@ -31,32 +31,28 @@ interface GridCell {
 function Board({ grid, minesCards, ones, twos, threes, fours, fives, sixes, sevens, eights, empties }: Props) {
   const renderBoard = () => {
     return grid.map(row => {
-      const rowCells = row.map(gridCell => ( <
-        Cell key = {
-          gridCell.y * row.length + gridCell.x
-        }
-        value = {
-          gridCell
-        }
+      const rowCells = row.map(gridCell => (
+        <Cell 
+          key={gridCell.y * row.length + gridCell.x}
+          value={gridCell}
         />
-        ));
-        
-        return <div className="row" key={""}>{rowCells}</div>;
-      });
-    }
+      )) 
+      return <div className="row" key={""}>{rowCells}</div>
+    })
+  }
     
-    const renderBoardCards = () => {
-      return grid.map(row => {
-        const rowCells = row.map(gridCell => (
-          <CellCard
+  const renderBoardCards = () => {
+    return grid.map(row => {
+      const rowCells = row.map(gridCell => (
+        <CellCard
           key={gridCell.y * row.length + gridCell.x}
           gridCell={gridCell}
-          />
-          ));
+        />
+      ));
           
-          return <div className="rowCard" key={""}>{rowCells}</div>;
-        });
-      }
+      return <div className="rowCard" key={""}>{rowCells}</div>;
+    });
+  }
       
       const renderCards = (name, className, arr) => {
         const cards = arr.map(card => (
@@ -91,21 +87,4 @@ function Board({ grid, minesCards, ones, twos, threes, fours, fives, sixes, seve
             </div>
           )
         }
-          
-          // Type checking With PropTypes
-          Board.propTypes = {
-            grid: PropTypes.array, 
-            cards: PropTypes.array,
-            minesCards: PropTypes.array,
-            ones: PropTypes.array,
-            twos: PropTypes.array,
-            threes: PropTypes.array,
-            fours: PropTypes.array,
-            fives: PropTypes.array,
-            sixes: PropTypes.array,
-            sevens: PropTypes.array,
-            eights: PropTypes.array,
-            empties: PropTypes.array
-          };
-          
-          export default Board;
+        export default Board;
