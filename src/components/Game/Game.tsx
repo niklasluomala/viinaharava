@@ -5,9 +5,9 @@ import "./style.css";
 import React from 'react';
 
 function Game() {
-    const [height, setHeight] = useState(6)
-    const [width, setWidth] = useState(6)
-    const [minesCount, setMinesCount] = useState(8)
+    const [height] = useState(6)
+    const [width] = useState(6)
+    const [minesCount] = useState(8)
     const [grid, setGrid] = useState<[GridCell[]]>([[]])
     const [minesCards, setMinesCards] = useState<string[]>([])
     const [ones, setOnes] = useState<string[]>([])
