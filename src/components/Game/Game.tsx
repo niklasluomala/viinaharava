@@ -1,33 +1,33 @@
 import { useState, useEffect } from 'react'
-import Board from "../Board/Board.tsx";
+import Board from "../Board/Board";
 
 import "./style.css";
+import React from 'react';
 
 function Game() {
     const [height, setHeight] = useState(6)
     const [width, setWidth] = useState(6)
     const [minesCount, setMinesCount] = useState(8)
-    const [grid, setGrid] = useState([])
-    const [cards, setCards] = useState([])
-    const [minesCards, setMinesCards] = useState([])
-    const [ones, setOnes] = useState([])
-    const [twos, setTwos] = useState([])
-    const [threes, setThrees] = useState([])
-    const [fours, setFours] = useState([])
-    const [fives, setFives] = useState([])
-    const [sixes, setSixes] = useState([])
-    const [sevens, setSevens] = useState([])
-    const [eights, setEights] = useState([])
-    const [empties, setEmpties] = useState([])
+    const [grid, setGrid] = useState<[GridCell[]]>([[]])
+    const [minesCards, setMinesCards] = useState<string[]>([])
+    const [ones, setOnes] = useState<string[]>([])
+    const [twos, setTwos] = useState<string[]>([])
+    const [threes, setThrees] = useState<string[]>([])
+    const [fours, setFours] = useState<string[]>([])
+    const [fives, setFives] = useState<string[]>([])
+    const [sixes, setSixes] = useState<string[]>([])
+    const [sevens, setSevens] = useState<string[]>([])
+    const [eights, setEights] = useState<string[]>([])
+    const [empties, setEmpties] = useState<string[]>([])
 
     const createNewBoard = () => {
-        let board = []
-        let minesArray = getRandomMines()
+        const board: [GridCell[]] = [[]]
+        const minesArray = getRandomMines()
 
         for (let i = 0; i < width; ++i) {
             board.push([])
             for (let j = 0; j < height; ++j) {
-                const gridCell = new GridCell(i, j, minesArray.includes(i * height + j))
+                const gridCell = new GridCell(i, j, minesArray.includes(i * height + j), "")
                 addGridCell(board, gridCell)
             }
         }
@@ -35,11 +35,11 @@ function Game() {
         return board
     }
 
-    const cardifyGrid = (board, minesCards, ones, twos, threes, fours, fives, sixes, sevens, eights, empties) => {
-        for (let row of board) {
-            for (let gridCell of row) {
-                let card = getCardForCell(gridCell, minesCards, ones, twos, threes, fours, fives, sixes, sevens, eights, empties)
-                gridCell.card = card
+    const cardifyGrid = (board: [GridCell[]], minesCards: string[], ones: string[], twos: string[], threes: string[], fours: string[], fives: string[], sixes: string[], sevens: string[], eights: string[], empties: string[]) => {
+        for (let i = 0; i < board.length; i++) {
+            for (let j = 0; j < board[i].length; j++) {
+                const card = getCardForCell(board[i][j], minesCards, ones, twos, threes, fours, fives, sixes, sevens, eights, empties)
+                board[i][j].card = card
             }
         }
     }
@@ -55,10 +55,10 @@ function Game() {
         // using 2 decks by default
         const decks = 2;
 
-        let deck = []
+        const deck: string[] = []
 
-        for (let value of values) {
-            for (let suite of suites) {
+        for (const value of values) {
+            for (const suite of suites) {
                 for (let i = 0; i < decks; i++) {
                     deck.push("".concat(value, suite))
                 }
@@ -68,36 +68,36 @@ function Game() {
         return deck
     }
 
-    const determineCardsForGrid = (board, cards, minesCards, ones, twos, threes, fours, fives, sixes, sevens, eights, empties) => {
+    const determineCardsForGrid = (board: [GridCell[]], cards: string[], minesCards: string[], ones: string[], twos: string[], threes: string[], fours: string[], fives: string[], sixes: string[], sevens: string[], eights: string[], empties: string[]) => {
         board.map(row => {
             row.map(cell => {
                 if (cell.isMine) {
-                    minesCards.push(cards.splice(cards.findIndex(card => card.match(/[(9)(10)]/g)), 1))
+                    minesCards.push(...cards.splice(cards.findIndex(card => card.match(/[(9)(10)]/g)), 1))
                 } else if (cell.n === 1) {
-                    ones.push(cards.splice(cards.findIndex(card => card.match(/[AJ]/g)), 1))
+                    ones.push(...cards.splice(cards.findIndex(card => card.match(/[AJ]/g)), 1))
                 } else if (cell.n === 2) {
-                    twos.push(cards.splice(cards.findIndex(card => card.match(/[2Q]/g)), 1))
+                    twos.push(...cards.splice(cards.findIndex(card => card.match(/[2Q]/g)), 1))
                 } else if (cell.n === 3) {
-                    threes.push(cards.splice(cards.findIndex(card => card.match(/[3K]/g)), 1))
+                    threes.push(...cards.splice(cards.findIndex(card => card.match(/[3K]/g)), 1))
                 } else if (cell.n === 4) {
-                    fours.push(cards.splice(cards.findIndex(card => card.match(/[4]/g)), 1))
+                    fours.push(...cards.splice(cards.findIndex(card => card.match(/[4]/g)), 1))
                 } else if (cell.n === 5) {
-                    fives.push(cards.splice(cards.findIndex(card => card.match(/[5]/g)), 1))
+                    fives.push(...cards.splice(cards.findIndex(card => card.match(/[5]/g)), 1))
                 } else if (cell.n === 6) {
-                    sixes.push(cards.splice(cards.findIndex(card => card.match(/[6]/g)), 1))
+                    sixes.push(...cards.splice(cards.findIndex(card => card.match(/[6]/g)), 1))
                 } else if (cell.n === 7) {
-                    sevens.push(cards.splice(cards.findIndex(card => card.match(/[7]/g)), 1))
+                    sevens.push(...cards.splice(cards.findIndex(card => card.match(/[7]/g)), 1))
                 } else if (cell.n === 8) {
-                    eights.push(cards.splice(cards.findIndex(card => card.match(/[8]/g)), 1))
+                    eights.push(...cards.splice(cards.findIndex(card => card.match(/[8]/g)), 1))
                 } else if (cell.n === 0 && !cell.isMine) {
-                    empties.push(cards.splice(cards.findIndex(card => card.match(/[7-8]/g)), 1))
+                    empties.push(...cards.splice(cards.findIndex(card => card.match(/[7-8]/g)), 1))
                 }
             })
         })
     }
 
     const getRandomMines = () => {
-        const minesArray = []
+        const minesArray: number[] = []
         const limit = width * height
         const minesPool = [...Array(limit).keys()]
 
@@ -109,23 +109,22 @@ function Game() {
         return minesArray
     }
 
-    const addGridCell = (grid, gridCell) => {
+    const addGridCell = (grid: [GridCell[]], gridCell: GridCell) => {
         const y = grid.length - 1
         const x = grid[y].length
         const lastGridCell = gridCell
-        const neighbours = getNeighbours(grid, y, x)
+        const neighbours: GridCell[] = getNeighbours(grid, y, x)
 
-        for (let neighbourGridCell of neighbours) {
-            if (lastGridCell.isMine) neighbourGridCell.n += 1
-            else if (neighbourGridCell.isMine) lastGridCell.n += 1
+        for (let i = 0; i < neighbours.length; i++) {
+            if (lastGridCell.isMine) neighbours[i].n += 1
+            else if (neighbours[i].isMine) lastGridCell.n += 1
         }
-
         grid[y].push(gridCell)
     }
 
-    const getNeighbours = (grid, y, x) => {
-        const neighbours = []
-        const currentRow = grid[y]
+    const getNeighbours = (grid: [GridCell[]], y: number, x: number) => {
+        const neighbours: GridCell[] = []
+        const currentRow: GridCell[] = grid[y]
         const prevRow = grid[y - 1]
         const nextRow = grid[y + 1]
 
@@ -205,25 +204,24 @@ function Game() {
       }
 
     const createNewGame = () => {
-        let board = createNewBoard()
-        let deck = getNewDeck()
-        let minesDeck = []
-        let onesDeck = []
-        let twosDeck = []
-        let threesDeck = []
-        let foursDeck = []
-        let fivesDeck = []
-        let sixesDeck = []
-        let sevensDeck = []
-        let eightsDeck = []
-        let emptiesDeck = []
+        const board = createNewBoard()
+        const deck = getNewDeck()
+        const minesDeck: string[] = []
+        const onesDeck: string[] = []
+        const twosDeck: string[] = []
+        const threesDeck: string[] = []
+        const foursDeck: string[] = []
+        const fivesDeck: string[] = []
+        const sixesDeck: string[] = []
+        const sevensDeck: string[] = []
+        const eightsDeck: string[] = []
+        const emptiesDeck: string[] = []
 
         determineCardsForGrid(board, deck, minesDeck, onesDeck, twosDeck, threesDeck, foursDeck, fivesDeck, sixesDeck,
             sevensDeck, eightsDeck, emptiesDeck)
         cardifyGrid(board, minesDeck, onesDeck, twosDeck, threesDeck, foursDeck, fivesDeck, sixesDeck,
             sevensDeck, eightsDeck, emptiesDeck)
         setGrid(board)
-        setCards(deck)
         setMinesCards(minesDeck)
         setOnes(onesDeck)
         setTwos(twosDeck)
@@ -248,7 +246,6 @@ function Game() {
         <br />
         <Board
             grid={grid}
-            cards={cards}
             minesCards={minesCards}
             ones={ones}
             twos={twos}
@@ -265,7 +262,13 @@ function Game() {
 }
 
 class GridCell {
-    constructor (y, x, isMine, card) {
+    x: number
+    y: number
+    card: string
+    n: number
+    isMine: boolean
+
+    constructor (y: number, x: number, isMine: boolean, card: string) {
         this.x = x
         this.y = y
         this.card = card

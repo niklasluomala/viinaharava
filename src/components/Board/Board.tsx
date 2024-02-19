@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Cell from "../Cell/Cell";
 import CellCard from "../CellCard/CellCard";
 
