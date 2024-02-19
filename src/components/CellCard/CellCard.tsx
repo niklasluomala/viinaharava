@@ -3,17 +3,25 @@ import * as React from "react";
 import "./style.css";
 
 interface Props {
-    card: string
+    gridCell: GridCell
 }
 
-function CellCard({ card }: Props) {
+interface GridCell {
+    x: number,
+    y: number,
+    card: string,
+    n: number,
+    isMine: boolean
+}
+
+function CellCard({ gridCell }: Props) {
     const className="cellcard"
 
     return (
         <div
           className={className}
         >
-            <p>{card}</p>
+            <p>{gridCell.card}</p>
         </div>
     )
 }
