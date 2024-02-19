@@ -58,7 +58,7 @@ function Board({ grid, minesCards, ones, twos, threes, fours, fives, sixes, seve
         });
       }
       
-      const renderCards = (className, name, arr) => {
+      const renderCards = (name, className, arr) => {
         const cards = arr.map(card => (
           <span key={ card }>{ card } </span>
           ));
@@ -77,7 +77,7 @@ function Board({ grid, minesCards, ones, twos, threes, fours, fives, sixes, seve
               <div className="grid">{renderBoard()}</div>
               <div className="grid">{renderBoardCards()}</div>
               <div className="ruleset">
-                <div className="mines">{renderCards("Miinat", "mines", minesCards)}</div>
+                <div className="mines">{renderCards("Miinat:", "mines", minesCards)}</div>
                 <div className="ones">{renderCards("Ykköset:", "ones", ones)}</div>
                 <div className="twos">{renderCards("Kakkoset:", "twos", twos)}</div>
                 <div className="threes">{renderCards("Kolmoset:", "threes", threes)}</div>
