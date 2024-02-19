@@ -1,8 +1,8 @@
-# Viinaharava 0.2
+# Viinaharava 0.3
 
-By [niklasluomala](https://github.com/niklasluomala) & [Loimaranta](https://github.com/Loimaranta)
+By [niklasluomala](https://github.com/niklasluomala) / [Loimaranta](https://github.com/Loimaranta) / [Jugebox](https://github.com/Jugebox)
 
-*"Pelkkä nimi ei välttämättä ole paras mahdollinen lähtökohta aloittaa juomapelin suunnittelu."*
+* "Pelkkä nimi ei välttämättä ole paras mahdollinen lähtökohta aloittaa juomapelin suunnittelu."*
 
 Albert Einstein kätellessään Abraham Lincolnia
 
@@ -18,17 +18,31 @@ n pelaajaa, n kuuluu välille [3, 6]
 
 Omavalintaiset juotavat
 
-## Pelin valmistelu (jakajalle):
+## Juomamäärät
 
-Järjestä pakka numerojärjestykseen.
+Tyhjä - 1
 
-Generoi Viinaharava (toisella välilehdellä) ja rakenna pelialue sijoittamalla ruutuja vastaavat kortit pelialueelle kuvapuoli alaspäin. Pelaajat eivät saa katsoa pelialueen kasaamista tasapuolisen kilpailuasetelman säilymiseksi.
+Ykkönen - 1
+
+Kakkonen - 2
+
+Kolmonen - 3
+
+jne.
+
+Miina - 5
+
+## Pelin valmistelu:
+
+Yhdistäkää pakat ja laittakaa ne numerojärjestykseen.
+
+Jakaja generoi Viinaharavan (toisella välilehdellä) ja rakentaa pelialueen sijoittamalla ruutuja vastaavat kortit pelialueelle kuvapuoli alaspäin. Pelaajat eivät saa katsoa pelialueen kasaamista tasapuolisen kilpailuasetelman säilymiseksi.
 
 Pelaajat selvittävät pelin aloittajan heittämällä noppaa jakajasta alkaen myötäpäivään. Suurimman silmäluvun saanut aloittaa pelin.
 
 Kasattuaan pelialueen jakaja ilmoittaa miinojen lukumäärän sekä pelialueelta löytyvän suurimman yksittäisen ruudun arvon - eli montako miinaa enimmillään yhden ruudun vieressä voi olla tällä pelikerralla.
 
-Kun pelialue on kasattu, pelialueen säännöt kerrattu ja pelin aloittaja selvillä, peli voi alkaa.
+Kun pelialue on kasattu ja pelin säännöt kerrattu sekä aloittaja selvillä, peli voi alkaa.
 
 ## Pelin kulku:
 
@@ -58,7 +72,7 @@ Mikäli liputus oli oikein, saa liputtanut pelaaja jakaa kortin arvon ja kertoim
 
 ## Pelin päättyminen
 
-Peli päättyy, kun laudalla on kääntämättä enää yhtä monta korttia, kuin miinoja on jäljellä.
+Peli päättyy, kun laudalla on kääntämättä yhtä monta korttia, kuin miinoja on jäljellä.
 
 Pelin päättyessä käännetään jäljellä olevat liputetut kortit pelilaudan vasemmasta yläkulmasta lähtien suunnassa oikealle-alas.
 
@@ -68,7 +82,7 @@ Onnistuneesta liputuksesta kortin liputtanut pelaaja saa jakaa kortin arvon ja k
 
 ### Pelilaudalla on enää miinoja kääntämättä
 
-Peli katsotaan päättyneeksi sen pelivuoron jälkeen, jonka aikana on tullut ilmeiseksi, että pelialueen kääntämättömät kortit ovat kaikki miinoja. Seuraava pelaajavuoro ei siis ehdi enää alkaa, eivätkä seuraavat pelaajat saa enää helppoja liputuksia.
+Peli katsotaan päättyneeksi sen pelivuoron jälkeen, jonka aikana on tullut ilmeiseksi, että pelialueen kääntämättömät kortit ovat kaikki miinoja. Seuraava pelaajavuoro ei siis ehdi enää alkaa, eivätkä seuraavat pelaajat siten saa helppoja liputuksia.
 
 ### Pelilauta on väärin kasattu tai puutteellinen
 
