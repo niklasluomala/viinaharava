@@ -14,8 +14,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.0",
+    "@mui/icons-material": "^5.15.11",
+    "@mui/lab": "^5.0.0-alpha.166",
+    "@mui/material": "^5.15.11",
     "cardsJS": "^1.1.1",
     "classnames": "^2.5.1",
+    "markdown-to-jsx": "^7.4.1",
+    "mui-markdown": "^1.1.13",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-markdown": "^9.0.1",
