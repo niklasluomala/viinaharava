@@ -7,5 +7,5 @@ export default defineConfig({
     react()
   ],
   assetsInclude: ['**/*.md'],
-  base: '/viinaharava/'
+  base: '/'
 })
