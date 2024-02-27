@@ -1,4 +1,4 @@
-import * as React from "react"
+import * as React from "react";
 import "./style.css"
 import cn from 'classnames'
 
@@ -7,17 +7,17 @@ interface Props {
 }
 
 interface GridCell {
-    isMine: boolean,
-    isEmpty: boolean,
+    x: number
+    y: number
+    card?: string
     n: number
-}
+    isMine: boolean
+  }
 
 function Cell({ value }: Props) {
     const getValue = () => {
         if (value.isMine) {
             return "💣"
-        } else if (value.isEmpty) {
-            return ""
         }
         
         return value.n
@@ -25,7 +25,6 @@ function Cell({ value }: Props) {
     
     const className = cn('cell', {
         'is-mine': value.isMine,
-        'is-empty': value.isEmpty
     })
 
     return (

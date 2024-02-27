@@ -19,12 +19,11 @@ interface Props {
 }
 
 interface GridCell {
-  x: number,
-  y: number,
-  card: string,
-  n: number,
-  isMine: boolean,
-  isEmpty: boolean
+  x: number
+  y: number
+  card?: string
+  n: number
+  isMine: boolean
 }
 
 function Board({ grid, minesCards, ones, twos, threes, fours, fives, sixes, sevens, eights, empties }: Props) {

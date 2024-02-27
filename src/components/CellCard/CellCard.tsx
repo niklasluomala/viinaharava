@@ -6,13 +6,12 @@ interface Props {
 }
 
 interface GridCell {
-    x: number,
-    y: number,
-    card: string,
-    n: number,
+    x: number
+    y: number
+    card?: string
+    n: number
     isMine: boolean
-}
-
+  }
 function CellCard({ gridCell }: Props) {
     const className="cellcard"
 

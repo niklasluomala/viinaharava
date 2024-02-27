@@ -4,11 +4,18 @@ import Board from "../Board/Board";
 import "./style.css";
 import React from 'react';
 
+interface GridCell {
+    x: number
+    y: number
+    card?: string
+    n: number
+    isMine: boolean
+}
+
 function Game() {
-    const [height] = useState(6)
-    const [width] = useState(6)
-    const [minesCount] = useState(8)
-    const [grid, setGrid] = useState<[GridCell[]]>([[]])
+    const [WIDTH, HEIGHT] = [6, 6]
+    const NUM_MINES = 6
+    const [grid, setGrid] = useState<GridCell[][]>([[]])
     const [minesCards, setMinesCards] = useState<string[]>([])
     const [ones, setOnes] = useState<string[]>([])
     const [twos, setTwos] = useState<string[]>([])
@@ -24,16 +31,14 @@ function Game() {
         const board: [GridCell[]] = [[]]
         const minesArray = getRandomMines()
 
-        for (let i = 0; i < width; ++i) {
+        for (let i = 0; i < WIDTH; ++i) {
             board.push([])
-            for (let j = 0; j < height; ++j) {
+            for (let j = 0; j < HEIGHT; ++j) {
                 const gridCell: GridCell = {
                     y: i,
                     x: j,
-                    isMine: minesArray.includes(i * height + j),
-                    card: "",
-                    n: 0,
-                    isEmpty: false
+                    isMine: minesArray.includes(i * HEIGHT + j),
+                    n: 0
                 }
                 //const gridCell = new GridCell(i, j, minesArray.includes(i * height + j), "")
                 addGridCell(board, gridCell)
@@ -105,10 +110,10 @@ function Game() {
 
     const getRandomMines = () => {
         const minesArray: number[] = []
-        const limit = width * height
+        const limit = WIDTH * HEIGHT
         const minesPool = [...Array(limit).keys()]
 
-        for (let i = 0; i < minesCount; ++i) {
+        for (let i = 0; i < NUM_MINES; ++i) {
             const n = Math.floor(Math.random() * minesPool.length)
             minesArray.push(...minesPool.splice(n, 1))
         }
@@ -266,25 +271,6 @@ function Game() {
         />
         </div>
     )
-}
-
-class GridCell {
-    x: number
-    y: number
-    card: string
-    n: number
-    isMine: boolean
-
-    constructor (y: number, x: number, isMine: boolean, card: string) {
-        this.x = x
-        this.y = y
-        this.card = card
-        this.n = 0
-        this.isMine = isMine
-    }
-    get isEmpty() {
-        return this.n === 0 && !this.isMine
-    }
 }
     
 export default Game;

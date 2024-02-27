@@ -2,7 +2,7 @@
 
 By [niklasluomala](https://github.com/niklasluomala) / [Loimaranta](https://github.com/Loimaranta) / [Jugebox](https://github.com/Jugebox)
 
-* "Pelkkä nimi ei välttämättä ole paras mahdollinen lähtökohta aloittaa juomapelin suunnittelu."*
+*"Pelkkä nimi ei välttämättä ole paras mahdollinen lähtökohta aloittaa juomapelin suunnittelu."*
 
 Albert Einstein kätellessään Abraham Lincolnia
 
