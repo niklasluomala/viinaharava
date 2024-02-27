@@ -1,6 +1,6 @@
 # Viinaharava 0.3
 
-By [niklasluomala](https://github.com/niklasluomala) / [Loimaranta](https://github.com/Loimaranta) / [Jugebox](https://github.com/Jugebox)
+By [niklasluomala](https://github.com/niklasluomala) / [Loimaranta](https://github.com/Loimaranta) / [Jugebox](https://github.com/Jugebox) / [kovipu](https://github.com/kovipu)
 
 *"Pelkkä nimi ei välttämättä ole paras mahdollinen lähtökohta aloittaa juomapelin suunnittelu."*
 
@@ -91,3 +91,4 @@ Mikäli pelilauta todetaan pelaajien toimesta yksimielisesti väärin kasatuksi 
 Pelilaudan ollessa väärin kasattu tai puutteelinen jakaja mitä nöyrimmin inhimillistä virhettään pahoitelkoot ja äärimmäistä tarkkaavaisuutta seuraavaa pelilautaa kasatessa noudattakoot, mikäli pelaajat tämän edelleen jakajaksi kelpuuttavat.
 
 Mikäli epäily pelilaudan kelpoisuudesta osoittautuu aiheettomaksi, tätä epäilleet pelaajat omalla ajallaan miinaharavan säännöt kerratkoot.
+
