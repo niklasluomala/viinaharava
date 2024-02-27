@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs'
 import 'react-tabs/style/react-tabs.css'
@@ -9,7 +7,7 @@ import RulesMarkdown from './rules.md'
 import ThanksMarkdown from './thanks.md'
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
-
+import React from 'react'
 
 function App() {
   const [rules, setRules] = useState("")
@@ -34,13 +32,17 @@ function App() {
             <Tab>Kiitokset</Tab>
           </TabList>
           <TabPanel>
-            <ReactMarkdown remarkPlugins={remarkGfm} children={rules}></ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {rules}
+            </ReactMarkdown>
           </TabPanel>
           <TabPanel>
             <Game />
           </TabPanel>
           <TabPanel>
-            <ReactMarkdown remarkPlugins={remarkGfm} children={thanks}></ReactMarkdown>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>
+              {thanks}
+            </ReactMarkdown>
           </TabPanel>
         </Tabs>
       </div>

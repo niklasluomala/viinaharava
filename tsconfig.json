@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "outDir": "./dist/",
+        "sourceMap": true,
+        "strictNullChecks": true,
+        "moduleResolution": "Bundler",
+        "module": "es2022",
+        "jsx": "react",
+        "target": "esnext",
+        "allowJs": true,
+        "isolatedModules": true,
+        "useDefineForClassFields": true
+    
+    },
+    "include": [
+        "./src/"
+     ]
+}
