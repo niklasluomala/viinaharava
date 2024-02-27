@@ -1,5 +1,6 @@
-import * as React from "react";
-import "./style.css";
+import * as React from "react"
+import "./style.css"
+import cn from 'classnames'
 
 interface Props {
     value: GridCell
@@ -22,10 +23,10 @@ function Cell({ value }: Props) {
         return value.n
     }
     
-    const className = 
-    "cell" +
-    (value.isMine ? " is-mine" : "") +
-    (value.isEmpty ? " is-empty" : "")
+    const className = cn('cell', {
+        'is-mine': value.isMine,
+        'is-empty': value.isEmpty
+    })
 
     return (
         <div className={ className }>
