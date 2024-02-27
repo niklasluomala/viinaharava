@@ -27,7 +27,15 @@ function Game() {
         for (let i = 0; i < width; ++i) {
             board.push([])
             for (let j = 0; j < height; ++j) {
-                const gridCell = new GridCell(i, j, minesArray.includes(i * height + j), "")
+                const gridCell: GridCell = {
+                    y: i,
+                    x: j,
+                    isMine: minesArray.includes(i * height + j),
+                    card: "",
+                    n: 0,
+                    isEmpty: false
+                }
+                //const gridCell = new GridCell(i, j, minesArray.includes(i * height + j), "")
                 addGridCell(board, gridCell)
             }
         }
@@ -45,7 +53,6 @@ function Game() {
     }
 
     const getNewDeck = () => {
-       
         // spades, clubs, diamonds, hearts
         const suites = ["♠️", "♣️", "♦️", "♥️"]
 
