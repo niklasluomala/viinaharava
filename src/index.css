@@ -82,6 +82,10 @@
   .thanks h2 {
     @apply mt-8 text-xl;
   }
+
+  .quote p {
+    @apply italic;
+  }
 }
 
 @layer base {

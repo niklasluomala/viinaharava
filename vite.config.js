@@ -17,6 +17,6 @@ export default defineConfig({
   assetsInclude: ['**/*.md'],
   base: '/',
   server: {
-    host: '192.168.1.145'
-  }
+    host: '192.168.1.145',
+  },
 });
