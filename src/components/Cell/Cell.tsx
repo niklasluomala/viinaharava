@@ -20,7 +20,7 @@ function Cell({ value }: Props) {
       return '💣';
     }
 
-    return value.n;
+    return value.n === 0 ? '' : value.n;
   };
 
   const className = cn('cell', {

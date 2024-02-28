@@ -1,6 +1,3 @@
-# Viinaharava 0.3
-
-By [niklasluomala](https://github.com/niklasluomala) / [Loimaranta](https://github.com/Loimaranta) / [Jugebox](https://github.com/Jugebox) / [kovipu](https://github.com/kovipu)
 
 *"Pelkkä nimi ei välttämättä ole paras mahdollinen lähtökohta aloittaa juomapelin suunnittelu."*
 

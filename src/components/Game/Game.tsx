@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Board from '../Board/Board';
+import { Button } from '@/components/ui/button';
 
 import './style.css';
 import React from 'react';
@@ -373,8 +374,8 @@ function Game() {
 
   return (
     <div className="game">
-      <div className="control-buttons">
-        <button onClick={() => createNewGame()}>Generoi</button>
+      <div className="controls">
+        <Button onClick={() => createNewGame()}>Generoi</Button>
       </div>
       <br />
       <Board

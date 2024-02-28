@@ -1,7 +1,3 @@
-# Kiitos
-
-Kiitos testaajille:
-
 Aleksi-Ilari Pelkonen
 
 Juho Ollila
