@@ -66,10 +66,10 @@
   }
 
   .rules h1 {
-    @apply mt-8 text-2xl;
+    @apply mt-8 text-2xl leading-loose;
   }
   .rules h2 {
-    @apply mt-8 text-xl;
+    @apply mt-8 text-xl leading-loose;
   }
   .rules h3 {
     @apply mt-8 text-lg;

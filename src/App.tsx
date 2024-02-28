@@ -25,6 +25,16 @@ function App() {
   const [rules, setRules] = useState('');
   const [thanks, setThanks] = useState('');
 
+  type Contributors = Map<string, string>;
+
+  const GAME_VER = 'Viinaharava 0.3';
+  const CONTRIBUTORS: Contributors = new Map<string, string>([
+    ["niklasluomala", "https://github.com/niklasluomala"],
+    ["Loimaranta", "https://github.com/Loimaranta"],
+    ["Jugebox", "https://github.com/Jugebox"],
+    ["kovipu", "https://github.com/kovipu"],
+  ]);
+
   useEffect(() => {
     fetch(RulesMarkdown)
       .then((response) => response.text())
@@ -47,38 +57,20 @@ function App() {
             <TabsContent value="rules" className="container mx-auto">
               <Card className="">
                 <CardHeader>
-                  <CardTitle>Viinaharava 0.3</CardTitle>
+                  <CardTitle>{GAME_VER}</CardTitle>
                   <CardDescription>
                     By
-                    <Button
-                      variant="link"
-                      onClick={() =>
-                        (window.location.href = 'https://www.github.com/niklasluomala')
-                      }
-                    >
-                      niklasluomala
-                    </Button>{' '}
-                    /
-                    <Button
-                      variant="link"
-                      onClick={() => (window.location.href = 'https://www.github.com/Loimaranta')}
-                    >
-                      Loimaranta
-                    </Button>{' '}
-                    /
-                    <Button
-                      variant="link"
-                      onClick={() => (window.location.href = 'https://www.github.com/Jugebox')}
-                    >
-                      Jugebox
-                    </Button>{' '}
-                    /
-                    <Button
-                      variant="link"
-                      onClick={() => (window.location.href = 'https://www.github.com/kovipu')}
-                    >
-                      kovipu
-                    </Button>
+                    {
+                      [...CONTRIBUTORS].map(([key, value]) => {
+                        return(
+                        <Button
+                          variant="link"
+                          onClick={() => window.location.href = value}
+                          key={key}>
+                            {key}
+                        </Button>)
+                      })
+                    }
                   </CardDescription>
                 </CardHeader>
                 <CardContent>

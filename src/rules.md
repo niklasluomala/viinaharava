@@ -3,7 +3,7 @@
 
 Albert Einstein kätellessään Abraham Lincolnia
 
-## Pelivälineet:
+# Pelivälineet:
 
 Jakaja
 
@@ -15,7 +15,7 @@ n pelaajaa, n kuuluu välille [3, 6]
 
 Omavalintaiset juotavat
 
-## Juomamäärät
+# Juomamäärät
 
 Tyhjä - 1
 
@@ -29,7 +29,7 @@ jne.
 
 Miina - 5
 
-## Pelin valmistelu:
+# Pelin valmistelu:
 
 Yhdistäkää pakat ja laittakaa ne numerojärjestykseen.
 
@@ -41,17 +41,17 @@ Kasattuaan pelialueen jakaja ilmoittaa miinojen lukumäärän sekä pelialueelta
 
 Kun pelialue on kasattu ja pelin säännöt kerrattu sekä aloittaja selvillä, peli voi alkaa.
 
-## Pelin kulku:
+# Pelin kulku:
 
 Jakaja pysyy kartalla pelin tilanteesta ja pitää pelaajat ajan tasalla pelin kulusta.
 
 Jokainen pelaaja valitsee vuorollaan yhden (1) kortin. Tämän jälkeen pelaajalla on kolme (3) vaihtoehtoa:
 
-### Kortin kääntäminen
+## Kortin kääntäminen
 
 Pelaaja arvaa, onko valittu kortti tyhjä vai yksi pelissä olevista numerokorteista. Pommia ei voi arvata. Tämän jälkeen pelaaja heittää noppaa ja käyttää tämän silmälukua kertoimena. Kortti käännetään ja mikäli arvaus osui oikein, pelaaja jakaa juotavia kortin arvon ja kertoimen tulon verran. Väärin arvatessa juomat tulevat arvaajalle.
 
-### Kortin liputtaminen
+## Kortin liputtaminen
 
 Pelaaja voi epäillä kortin olevan pommi ja liputtaa tämän. Kortti liputetaan heittämällä noppaa ja asettamalla se saatu silmäluku ylöspäin liputetun kortin päälle. Kortti kääntyy enää kahdella tavalla:
 
@@ -59,7 +59,7 @@ Toisen pelaajan haastaessa liputuksen
 
 Pelin päättyessä
 
-### Liputetun kortin haastaminen
+## Liputetun kortin haastaminen
 
 Pelaaja voi haastaa toisen pelaajan liputtaman kortin. Tällöin jakaja kääntää kortin ja tapahtuu yksi kahdesta asiasta:
 
@@ -67,7 +67,7 @@ Mikäli liputus oli väärä, saa liputuksen haastanut pelaaja jakaa kortin arvo
 
 Mikäli liputus oli oikein, saa liputtanut pelaaja jakaa kortin arvon ja kertoimen tulon verran juotavia. Juomat tulevat lisäksi haaston hävinneelle pelaajalle itselleen.
 
-## Pelin päättyminen
+# Pelin päättyminen
 
 Peli päättyy, kun laudalla on kääntämättä yhtä monta korttia, kuin miinoja on jäljellä.
 
@@ -75,13 +75,13 @@ Pelin päättyessä käännetään jäljellä olevat liputetut kortit pelilaudan
 
 Onnistuneesta liputuksesta kortin liputtanut pelaaja saa jakaa kortin arvon ja kertoimen tulon verran juotavia. Väärin arvatessa juomat tulevat liputtajalle.
 
-## Erikoistilanteita
+# Erikoistilanteita
 
-### Pelilaudalla on enää miinoja kääntämättä
+## Pelilaudalla on enää miinoja kääntämättä
 
 Peli katsotaan päättyneeksi sen pelivuoron jälkeen, jonka aikana on tullut ilmeiseksi, että pelialueen kääntämättömät kortit ovat kaikki miinoja. Seuraava pelaajavuoro ei siis ehdi enää alkaa, eivätkä seuraavat pelaajat siten saa helppoja liputuksia.
 
-### Pelilauta on väärin kasattu tai puutteellinen
+## Pelilauta on väärin kasattu tai puutteellinen
 
 Mikäli pelilauta todetaan pelaajien toimesta yksimielisesti väärin kasatuksi tai puutteelliseksi, voidaan peli päättää tai pelata loppuun pienellä jännityselementillä.
 
