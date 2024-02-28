@@ -17,6 +17,7 @@ function Game() {
   const [WIDTH, HEIGHT] = [6, 6];
   const NUM_MINES = 6;
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
+  const [minesArray, setMinesArray] = useState<number[]>([]);
   const [minesCards, setMinesCards] = useState<string[]>([]);
   const [ones, setOnes] = useState<string[]>([]);
   const [twos, setTwos] = useState<string[]>([]);
@@ -30,7 +31,8 @@ function Game() {
 
   const createNewBoard = () => {
     const board: [GridCell[]] = [[]];
-    const minesArray = getRandomMines();
+    const minesArr = getRandomMines();
+    setMinesArray(minesArr);
 
     for (let i = 0; i < WIDTH; ++i) {
       board.push([]);
@@ -38,7 +40,7 @@ function Game() {
         const gridCell: GridCell = {
           y: i,
           x: j,
-          isMine: minesArray.includes(i * HEIGHT + j),
+          isMine: minesArr.includes(i * HEIGHT + j),
           n: 0,
         };
         //const gridCell = new GridCell(i, j, minesArray.includes(i * height + j), "")
@@ -376,6 +378,17 @@ function Game() {
     <div className="game">
       <div className="controls">
         <Button onClick={() => createNewGame()}>Generoi</Button>
+      </div>
+      <div className="seedEnter">
+        <input onChange={(e) => {
+            const seed = e.target.value.toUpperCase().split(' ');
+            let newArray = seed.forEach(v => parseInt(v, 36));
+            }} />
+      </div>
+      <div className="seedDisplay">
+        {
+            minesArray.reverse().map(n => n.toString(36)).join(' ').toUpperCase()
+        }
       </div>
       <br />
       <Board
