@@ -86,6 +86,10 @@
   .quote p {
     @apply italic;
   }
+
+  .seedEnter input {
+    @apply text-black;
+  }
 }
 
 @layer base {

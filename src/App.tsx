@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import './App.css';
 import './index.css';
-import Game from './components/Game/Game.jsx';
+import Game from './components/Game/Game';
+import PlayerView from './components/PlayerView/PlayerView';
 import RulesMarkdown from './rules.md';
 import ThanksMarkdown from './thanks.md';
 import RequirementsMarkdown from './requirements.md';
@@ -43,7 +44,7 @@ function App() {
   type Contributors = Map<string, string>;
   type Rules = Map<string, string>;
 
-  const GAME_VER = 'Viinaharava 0.3';
+  const GAME_VER = 'Viinaharava 0.4';
   const CONTRIBUTORS: Contributors = new Map<string, string>([
     ['niklasluomala', 'https://github.com/niklasluomala'],
     ['Loimaranta', 'https://github.com/Loimaranta'],
@@ -90,7 +91,8 @@ function App() {
           <Tabs defaultValue="rules">
             <TabsList className="w-full">
               <TabsTrigger value="rules">Säännöt</TabsTrigger>
-              <TabsTrigger value="generator">Generaattori</TabsTrigger>
+              <TabsTrigger value="playerView">Pelaajanäkymä</TabsTrigger>
+              <TabsTrigger value="dealerView">Jakajan näkymä</TabsTrigger>
               <TabsTrigger value="thanks">Kiitokset</TabsTrigger>
             </TabsList>
             <TabsContent value="rules" className="container mx-auto">
@@ -140,11 +142,28 @@ function App() {
                 </CardContent>
               </Card>
             </TabsContent>
-            <TabsContent value="generator" className="container mx-auto">
+            <TabsContent value="playerView" className="container mx-auto">
               <Card>
                 <CardHeader>
-                  <CardTitle>Generaattori</CardTitle>
-                  <CardDescription>Jakajan näkymä</CardDescription>
+                  <CardTitle>Pelaajan näkymä</CardTitle>
+                  <CardDescription>
+                    Tässä näkymässä pelaajat voivat syöttää koodin selkeyttämään peliä.
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="game">
+                    <PlayerView />
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
+            <TabsContent value="dealerView" className="container mx-auto">
+              <Card>
+                <CardHeader>
+                  <CardTitle>Jakajan näkymä</CardTitle>
+                  <CardDescription>
+                    Tässä näkymässä jakaja voi generoida uuden pelialueen.
+                  </CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="game">

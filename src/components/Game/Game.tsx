@@ -18,6 +18,7 @@ function Game() {
   const NUM_MINES = 6;
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
   const [minesArray, setMinesArray] = useState<number[]>([]);
+  const [seed, setSeed] = useState<string>('');
   const [minesCards, setMinesCards] = useState<string[]>([]);
   const [ones, setOnes] = useState<string[]>([]);
   const [twos, setTwos] = useState<string[]>([]);
@@ -29,9 +30,9 @@ function Game() {
   const [eights, setEights] = useState<string[]>([]);
   const [empties, setEmpties] = useState<string[]>([]);
 
-  const createNewBoard = () => {
+  const createNewBoard = (seededArr: number[]) => {
     const board: [GridCell[]] = [[]];
-    const minesArr = getRandomMines();
+    const minesArr = seededArr.length != 0 ? seededArr : getRandomMines();
     setMinesArray(minesArr);
 
     for (let i = 0; i < WIDTH; ++i) {
@@ -316,8 +317,8 @@ function Game() {
     return card;
   };
 
-  const createNewGame = () => {
-    const board = createNewBoard();
+  const createNewGame = (seededArray: number[]) => {
+    const board = seededArray.length != 0 ? createNewBoard(seededArray) : createNewBoard([]);
     const deck = getNewDeck();
     const minesDeck: string[] = [];
     const onesDeck: string[] = [];
@@ -371,24 +372,27 @@ function Game() {
   };
 
   useEffect(() => {
-    createNewGame();
+    createNewGame([]);
   }, []);
+
+  const handleSubmission = (e: React.FormEvent) => {
+    if (e) e.preventDefault();
+    const seedArray = seed.split(' ').map((n) => parseInt(n, 36));
+    setMinesArray(seedArray);
+    createNewGame(seedArray);
+  };
 
   return (
     <div className="game">
       <div className="controls">
-        <Button onClick={() => createNewGame()}>Generoi</Button>
+        <Button onClick={() => createNewGame([])}>Generoi</Button>
       </div>
-      <div className="seedEnter">
-        <input onChange={(e) => {
-            const seed = e.target.value.toUpperCase().split(' ');
-            let newArray = seed.forEach(v => parseInt(v, 36));
-            }} />
-      </div>
+      <br />
       <div className="seedDisplay">
-        {
-            minesArray.reverse().map(n => n.toString(36)).join(' ').toUpperCase()
-        }
+        {minesArray
+          .map((n) => n.toString(36))
+          .join(' ')
+          .toUpperCase()}
       </div>
       <br />
       <Board
