@@ -3,7 +3,6 @@ import './App.css';
 import './index.css';
 import Game from './components/Game/Game';
 import PlayerView from './components/PlayerView/PlayerView';
-import RulesMarkdown from './rules.md';
 import ThanksMarkdown from './thanks.md';
 import RequirementsMarkdown from './requirements.md';
 import DrinksMarkdown from './drinks.md';
@@ -91,7 +90,7 @@ function App() {
           <Tabs defaultValue="rules">
             <TabsList className="w-full">
               <TabsTrigger value="rules">Säännöt</TabsTrigger>
-              <TabsTrigger value="playerView">Pelaajanäkymä</TabsTrigger>
+              <TabsTrigger value="playerView">Pelaajan näkymä</TabsTrigger>
               <TabsTrigger value="dealerView">Jakajan näkymä</TabsTrigger>
               <TabsTrigger value="thanks">Kiitokset</TabsTrigger>
             </TabsList>

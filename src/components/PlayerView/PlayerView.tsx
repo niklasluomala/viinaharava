@@ -17,7 +17,7 @@ function Game() {
   const NUM_MINES = 6;
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
   const [minesArray, setMinesArray] = useState<number[]>([]);
-  const [seed, setSeed] = useState<string>('');
+  const [seed, setSeed] = useState<number>(Math.floor(Math.random() * 1000000));
   const [minesCards, setMinesCards] = useState<string[]>([]);
   const [ones, setOnes] = useState<string[]>([]);
   const [twos, setTwos] = useState<string[]>([]);
@@ -29,9 +29,15 @@ function Game() {
   const [eights, setEights] = useState<string[]>([]);
   const [empties, setEmpties] = useState<string[]>([]);
 
+
+  const random = (localSeed: number) => {
+    const x = Math.sin(localSeed) * 1000000;
+    return x - Math.floor(x);
+  }
+  
   const createNewBoard = (seededArr: number[]) => {
     const board: [GridCell[]] = [[]];
-    const minesArr = seededArr.length != 0 ? seededArr : getRandomMines();
+    const minesArr = seededArr.length != 0 ? seededArr : getRandomMines(seed);
     setMinesArray(minesArr);
 
     for (let i = 0; i < WIDTH; ++i) {
@@ -198,13 +204,13 @@ function Game() {
     });
   };
 
-  const getRandomMines = () => {
+  const getRandomMines = (seed: number) => {
     const minesArray: number[] = [];
     const limit = WIDTH * HEIGHT;
     const minesPool = [...Array(limit).keys()];
 
     for (let i = 0; i < NUM_MINES; ++i) {
-      const n = Math.floor(Math.random() * minesPool.length);
+      const n =  random(seed++) * minesPool.length;
       minesArray.push(...minesPool.splice(n, 1));
     }
 
@@ -374,9 +380,9 @@ function Game() {
 
   const handleSubmission = (e: React.FormEvent) => {
     if (e) e.preventDefault();
-    const seedArray = seed.split(' ').map((n) => parseInt(n, 36));
-    setMinesArray(seedArray);
-    createNewGame(seedArray);
+    const seededArray = getRandomMines(seed);
+    setMinesArray(seededArray);
+    createNewGame(seededArray);
   };
 
   return (
@@ -384,7 +390,8 @@ function Game() {
       <div className="seedEnter">
           <input
             onChange={(e) => {
-              setSeed(e.target.value);
+                const localSeed = parseInt(e.target.value);
+              setSeed(localSeed);
             }}
           />
           <br />
@@ -392,10 +399,7 @@ function Game() {
           <Button onClick={handleSubmission}>Syötä koodi</Button>
       </div>
       <div className="seedDisplay">
-        {minesArray
-          .map((n) => n.toString(36))
-          .join(' ')
-          .toUpperCase()}
+        {seed}
       </div>
       <br />
       <PlayerBoard

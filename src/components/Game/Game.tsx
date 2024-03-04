@@ -18,7 +18,7 @@ function Game() {
   const NUM_MINES = 6;
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
   const [minesArray, setMinesArray] = useState<number[]>([]);
-  const [seed, setSeed] = useState<string>('');
+  const [seed, setSeed] = useState<number>(Math.floor(Math.random() * 1000000));
   const [minesCards, setMinesCards] = useState<string[]>([]);
   const [ones, setOnes] = useState<string[]>([]);
   const [twos, setTwos] = useState<string[]>([]);
@@ -29,6 +29,11 @@ function Game() {
   const [sevens, setSevens] = useState<string[]>([]);
   const [eights, setEights] = useState<string[]>([]);
   const [empties, setEmpties] = useState<string[]>([]);
+
+  const random = (localSeed: number) => {
+    const x = Math.sin(localSeed) * 1000000;
+    return x - Math.floor(x);
+  }
 
   const createNewBoard = (seededArr: number[]) => {
     const board: [GridCell[]] = [[]];
@@ -203,9 +208,11 @@ function Game() {
     const minesArray: number[] = [];
     const limit = WIDTH * HEIGHT;
     const minesPool = [...Array(limit).keys()];
+    let seed = Math.floor(Math.random() * 1000000);
+    setSeed(seed);
 
     for (let i = 0; i < NUM_MINES; ++i) {
-      const n = Math.floor(Math.random() * minesPool.length);
+      const n =  random(seed++) * minesPool.length;
       minesArray.push(...minesPool.splice(n, 1));
     }
 
@@ -248,55 +255,55 @@ function Game() {
   };
 
   const getCardForCell = (
-    cell,
-    minesCards,
-    ones,
-    twos,
-    threes,
-    fours,
-    fives,
-    sixes,
-    sevens,
-    eights,
-    empties
+    cell: GridCell,
+    minesCards: string[],
+    ones: string[],
+    twos: string[],
+    threes: string[],
+    fours: string[],
+    fives: string[],
+    sixes: string[],
+    sevens: string[],
+    eights: string[],
+    empties: string[]
   ) => {
     let card = '';
     if (cell.isMine) {
-      card = minesCards.shift();
+      card = minesCards.shift()!;
       minesCards.push(card);
     } else if (cell.n === 1) {
-      card = ones.shift();
+      card = ones.shift()!;
       ones.push(card);
     } else if (cell.n === 2) {
-      card = twos.shift();
+      card = twos.shift()!;
       twos.push(card);
     } else if (cell.n === 3) {
-      card = threes.shift();
+      card = threes.shift()!;
       threes.push(card);
     } else if (cell.n === 4) {
-      card = fours.shift();
+      card = fours.shift()!;
       fours.push(card);
     } else if (cell.n === 5) {
-      card = fives.shift();
+      card = fives.shift()!;
       fives.push(card);
     } else if (cell.n === 6) {
-      card = sixes.shift();
+      card = sixes.shift()!;
       sixes.push(card);
     } else if (cell.n === 7) {
-      card = sevens.shift();
+      card = sevens.shift()!;
       sevens.push(card);
     } else if (cell.n === 8) {
-      card = eights.shift();
+      card = eights.shift()!;
       eights.push(card);
     } else if (cell.n === 0 && !cell.isMine) {
       // check if card is already used
       let cardIsUsed = false;
       do {
         cardIsUsed = false;
-        card = empties.shift();
-        if (ones.find((one) => one == card)) {
+        card = empties.shift()!;
+        if (ones.find((one: string) => one == card)) {
           cardIsUsed = true;
-        } else if (twos.find((two) => two == card)) {
+        } else if (twos.find((two: string) => two == card)) {
           cardIsUsed = true;
         } else if (threes.find((three) => three == card)) {
           cardIsUsed = true;
@@ -389,10 +396,7 @@ function Game() {
       </div>
       <br />
       <div className="seedDisplay">
-        {minesArray
-          .map((n) => n.toString(36))
-          .join(' ')
-          .toUpperCase()}
+        {seed}
       </div>
       <br />
       <Board
