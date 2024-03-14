@@ -96,7 +96,7 @@ function App() {
       <div>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <Tabs defaultValue="rules">
-            <TabsList className="w-full justify-start overflow-x-auto no-scrollbar">
+            <TabsList className="w-full justify-between md:justify-center overflow-x-auto no-scrollbar">
               <TabsTrigger value="rules">Säännöt</TabsTrigger>
               <TabsTrigger value="playerView">Pelaajan näkymä</TabsTrigger>
               <TabsTrigger value="dealerView">Jakajan näkymä</TabsTrigger>
