@@ -28,6 +28,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+} from '@/components/ui/dropdown-menu';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ThemeProvider } from '@/components/theme-provider/theme-provider';
 
@@ -88,7 +96,7 @@ function App() {
       <div>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
           <Tabs defaultValue="rules">
-            <TabsList className="w-full">
+            <TabsList className="w-full justify-start overflow-x-auto no-scrollbar">
               <TabsTrigger value="rules">Säännöt</TabsTrigger>
               <TabsTrigger value="playerView">Pelaajan näkymä</TabsTrigger>
               <TabsTrigger value="dealerView">Jakajan näkymä</TabsTrigger>

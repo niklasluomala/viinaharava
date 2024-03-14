@@ -29,12 +29,11 @@ function Game() {
   const [eights, setEights] = useState<string[]>([]);
   const [empties, setEmpties] = useState<string[]>([]);
 
-
   const random = (localSeed: number) => {
     const x = Math.sin(localSeed) * 1000000;
     return x - Math.floor(x);
-  }
-  
+  };
+
   const createNewBoard = (seededArr: number[]) => {
     const board: [GridCell[]] = [[]];
     const minesArr = seededArr.length != 0 ? seededArr : getRandomMines(seed);
@@ -210,7 +209,7 @@ function Game() {
     const minesPool = [...Array(limit).keys()];
 
     for (let i = 0; i < NUM_MINES; ++i) {
-      const n =  random(seed++) * minesPool.length;
+      const n = random(seed++) * minesPool.length;
       minesArray.push(...minesPool.splice(n, 1));
     }
 
@@ -388,19 +387,17 @@ function Game() {
   return (
     <div className="game">
       <div className="seedEnter">
-          <input
-            onChange={(e) => {
-                const localSeed = parseInt(e.target.value);
-              setSeed(localSeed);
-            }}
-          />
-          <br />
-          <br />
-          <Button onClick={handleSubmission}>Syötä koodi</Button>
+        <input
+          onChange={(e) => {
+            const localSeed = parseInt(e.target.value);
+            setSeed(localSeed);
+          }}
+        />
+        <br />
+        <br />
+        <Button onClick={handleSubmission}>Syötä koodi</Button>
       </div>
-      <div className="seedDisplay">
-        {seed}
-      </div>
+      <div className="seedDisplay">{seed}</div>
       <br />
       <PlayerBoard
         grid={grid}

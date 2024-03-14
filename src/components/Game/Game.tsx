@@ -33,7 +33,7 @@ function Game() {
   const random = (localSeed: number) => {
     const x = Math.sin(localSeed) * 1000000;
     return x - Math.floor(x);
-  }
+  };
 
   const createNewBoard = (seededArr: number[]) => {
     const board: [GridCell[]] = [[]];
@@ -212,7 +212,7 @@ function Game() {
     setSeed(seed);
 
     for (let i = 0; i < NUM_MINES; ++i) {
-      const n =  random(seed++) * minesPool.length;
+      const n = random(seed++) * minesPool.length;
       minesArray.push(...minesPool.splice(n, 1));
     }
 
@@ -395,9 +395,7 @@ function Game() {
         <Button onClick={() => createNewGame([])}>Generoi</Button>
       </div>
       <br />
-      <div className="seedDisplay">
-        {seed}
-      </div>
+      <div className="seedDisplay">{seed}</div>
       <br />
       <Board
         grid={grid}
