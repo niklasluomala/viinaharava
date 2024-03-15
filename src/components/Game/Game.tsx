@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import Board from '../Board/Board';
 import { Button } from '@/components/ui/button';
+import { useContext } from 'react';
+import { GameContext } from '@/GameContext';
 
 import './style.css';
 import React from 'react';
@@ -13,12 +15,13 @@ interface GridCell {
   isMine: boolean;
 }
 
-function Game() {
+export default function Game() {
   const [WIDTH, HEIGHT] = [6, 6];
   const NUM_MINES = 6;
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
   const [minesArray, setMinesArray] = useState<number[]>([]);
-  const [seed, setSeed] = useState<number>(Math.floor(Math.random() * 1000000));
+  //const [seed, setSeed] = useState<number>(Math.floor(Math.random() * 1000000));
+  const gameContext = useContext(GameContext);
   const [minesCards, setMinesCards] = useState<string[]>([]);
   const [ones, setOnes] = useState<string[]>([]);
   const [twos, setTwos] = useState<string[]>([]);
@@ -208,8 +211,7 @@ function Game() {
     const minesArray: number[] = [];
     const limit = WIDTH * HEIGHT;
     const minesPool = [...Array(limit).keys()];
-    let seed = Math.floor(Math.random() * 1000000);
-    setSeed(seed);
+    let seed = gameContext.seed;
 
     for (let i = 0; i < NUM_MINES; ++i) {
       const n = random(seed++) * minesPool.length;
@@ -325,6 +327,7 @@ function Game() {
   };
 
   const createNewGame = (seededArray: number[]) => {
+
     const board = seededArray.length != 0 ? createNewBoard(seededArray) : createNewBoard([]);
     const deck = getNewDeck();
     const minesDeck: string[] = [];
@@ -382,20 +385,16 @@ function Game() {
     createNewGame([]);
   }, []);
 
-  const handleSubmission = (e: React.FormEvent) => {
-    if (e) e.preventDefault();
-    const seedArray = seed.split(' ').map((n) => parseInt(n, 36));
-    setMinesArray(seedArray);
-    createNewGame(seedArray);
-  };
-
   return (
     <div className="game">
       <div className="controls">
-        <Button onClick={() => createNewGame([])}>Generoi</Button>
+        <Button onClick={() => {
+            gameContext.seed = Math.floor(Math.random() * 1000000);
+            createNewGame([]);
+          }}>Generoi</Button>
       </div>
       <br />
-      <div className="seedDisplay">{seed}</div>
+      <div className="seedDisplay">{gameContext.seed}</div>
       <br />
       <Board
         grid={grid}
@@ -413,5 +412,3 @@ function Game() {
     </div>
   );
 }
-
-export default Game;

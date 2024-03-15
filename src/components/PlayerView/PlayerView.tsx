@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import PlayerBoard from '../PlayerBoard/PlayerBoard';
 import { Button } from '@/components/ui/button';
+import { useContext } from 'react';
+import { GameContext } from '@/GameContext';
 
 import React from 'react';
 
@@ -17,7 +19,7 @@ function Game() {
   const NUM_MINES = 6;
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
   const [minesArray, setMinesArray] = useState<number[]>([]);
-  const [seed, setSeed] = useState<number>(Math.floor(Math.random() * 1000000));
+  const gameContext = useContext(GameContext);
   const [minesCards, setMinesCards] = useState<string[]>([]);
   const [ones, setOnes] = useState<string[]>([]);
   const [twos, setTwos] = useState<string[]>([]);
@@ -375,11 +377,15 @@ function Game() {
     setEmpties(emptiesDeck);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    const seededArray = getRandomMines(gameContext.seed);
+    setMinesArray(seededArray);
+    createNewGame(seededArray);
+  }, []);
 
   const handleSubmission = (e: React.FormEvent) => {
     if (e) e.preventDefault();
-    const seededArray = getRandomMines(seed);
+    const seededArray = getRandomMines(gameContext.seed);
     setMinesArray(seededArray);
     createNewGame(seededArray);
   };
@@ -389,15 +395,14 @@ function Game() {
       <div className="seedEnter">
         <input
           onChange={(e) => {
-            const localSeed = parseInt(e.target.value);
-            setSeed(localSeed);
+            gameContext.seed = parseInt(e.target.value);
           }}
         />
         <br />
         <br />
         <Button onClick={handleSubmission}>Syötä koodi</Button>
       </div>
-      <div className="seedDisplay">{seed}</div>
+      <div className="seedDisplay">{gameContext.seed}</div>
       <br />
       <PlayerBoard
         grid={grid}

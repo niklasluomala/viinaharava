@@ -103,7 +103,7 @@ function App() {
               <TabsTrigger value="thanks">Kiitokset</TabsTrigger>
             </TabsList>
             <TabsContent value="rules" className="container mx-auto">
-              <Card className="">
+              <Card>
                 <CardHeader>
                   <CardTitle>{GAME_VER}</CardTitle>
                   <CardDescription>

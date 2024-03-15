@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "vite build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
+    "deploy": "echo viinaharava.fi > ./dist/CNAME && gh-pages -d dist",
     "lint": "eslint . --ext js,jsx,ts --report-unused-disable-directives --max-warnings 0",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,css}\"",
     "preview": "vite preview"
