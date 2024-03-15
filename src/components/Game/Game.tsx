@@ -3,6 +3,11 @@ import Board from '../Board/Board';
 import { Button } from '@/components/ui/button';
 import { useContext } from 'react';
 import { GameContext } from '@/GameContext';
+import { Label } from '@/components/ui/label';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Slider } from '@/components/ui/slider';
+import { cn } from '@/lib/utils';
+import { MinesSelector } from '@/components/mines-selector';
 
 import './style.css';
 import React from 'react';
@@ -16,8 +21,6 @@ interface GridCell {
 }
 
 export default function Game() {
-  const [WIDTH, HEIGHT] = [6, 6];
-  const NUM_MINES = 6;
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
   const [minesArray, setMinesArray] = useState<number[]>([]);
   //const [seed, setSeed] = useState<number>(Math.floor(Math.random() * 1000000));
@@ -43,13 +46,13 @@ export default function Game() {
     const minesArr = seededArr.length != 0 ? seededArr : getRandomMines();
     setMinesArray(minesArr);
 
-    for (let i = 0; i < WIDTH; ++i) {
+    for (let i = 0; i < gameContext.width; ++i) {
       board.push([]);
-      for (let j = 0; j < HEIGHT; ++j) {
+      for (let j = 0; j < gameContext.height; ++j) {
         const gridCell: GridCell = {
           y: i,
           x: j,
-          isMine: minesArr.includes(i * HEIGHT + j),
+          isMine: minesArr.includes(i * gameContext.height + j),
           n: 0,
         };
         //const gridCell = new GridCell(i, j, minesArray.includes(i * height + j), "")
@@ -209,11 +212,16 @@ export default function Game() {
 
   const getRandomMines = () => {
     const minesArray: number[] = [];
-    const limit = WIDTH * HEIGHT;
-    const minesPool = [...Array(limit).keys()];
-    let seed = gameContext.dealerSeed;
+    const wholeSeed = gameContext.dealerSeed.toString();
+    gameContext.mines = parseInt(wholeSeed[0]);
+    gameContext.height = parseInt(wholeSeed[1]);
+    gameContext.width = parseInt(wholeSeed[2]);
+    let seed = parseInt(wholeSeed.substring(3));
 
-    for (let i = 0; i < NUM_MINES; ++i) {
+    const limit = gameContext.width * gameContext.height;
+    const minesPool = [...Array(limit).keys()];
+
+    for (let i = 0; i < gameContext.mines; ++i) {
       const n = random(seed++) * minesPool.length;
       minesArray.push(...minesPool.splice(n, 1));
     }
@@ -327,7 +335,6 @@ export default function Game() {
   };
 
   const createNewGame = (seededArray: number[]) => {
-
     const board = seededArray.length != 0 ? createNewBoard(seededArray) : createNewBoard([]);
     const deck = getNewDeck();
     const minesDeck: string[] = [];
@@ -388,15 +395,33 @@ export default function Game() {
   return (
     <div className="game">
       <div className="controls">
-        <Button onClick={() => {
-            const rand = Math.floor(Math.random() * 1000000);
+        <GameContext.Provider value={gameContext}>
+          <MinesSelector defaultValue={[gameContext.mines]} />
+        </GameContext.Provider>
+
+        <Button
+          onClick={() => {
+            const rand = parseInt(
+              ''.concat(
+                gameContext.mines.toString(),
+                gameContext.width.toString(),
+                gameContext.height.toString(),
+                Math.floor(Math.random() * 1000000).toString()
+              )
+            );
             gameContext.dealerSeed = rand;
             gameContext.playerSeed = rand;
             createNewGame([]);
-          }}>Generoi</Button>
+          }}
+        >
+          Generoi
+        </Button>
       </div>
       <br />
-      <div className="seedDisplay">{gameContext.dealerSeed}</div>
+      <div className="seedDisplay">
+        <p>Pelin numero</p>
+        {gameContext.dealerSeed}
+      </div>
       <br />
       <Board
         grid={grid}

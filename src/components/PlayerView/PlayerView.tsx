@@ -15,8 +15,6 @@ interface GridCell {
 }
 
 function Game() {
-  const [WIDTH, HEIGHT] = [6, 6];
-  const NUM_MINES = 6;
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
   const [minesArray, setMinesArray] = useState<number[]>([]);
   const gameContext = useContext(GameContext);
@@ -42,13 +40,13 @@ function Game() {
     const minesArr = seededArr.length != 0 ? seededArr : getRandomMines(localSeed);
     setMinesArray(minesArr);
 
-    for (let i = 0; i < WIDTH; ++i) {
+    for (let i = 0; i < gameContext.width; ++i) {
       board.push([]);
-      for (let j = 0; j < HEIGHT; ++j) {
+      for (let j = 0; j < gameContext.height; ++j) {
         const gridCell: GridCell = {
           y: i,
           x: j,
-          isMine: minesArr.includes(i * HEIGHT + j),
+          isMine: minesArr.includes(i * gameContext.height + j),
           n: 0,
         };
         //const gridCell = new GridCell(i, j, minesArray.includes(i * height + j), "")
@@ -208,10 +206,10 @@ function Game() {
 
   const getRandomMines = (seed: number) => {
     const minesArray: number[] = [];
-    const limit = WIDTH * HEIGHT;
+    const limit = gameContext.width * gameContext.height;
     const minesPool = [...Array(limit).keys()];
 
-    for (let i = 0; i < NUM_MINES; ++i) {
+    for (let i = 0; i < gameContext.mines; ++i) {
       const n = random(seed++) * minesPool.length;
       minesArray.push(...minesPool.splice(n, 1));
     }
@@ -379,15 +377,19 @@ function Game() {
   };
 
   useEffect(() => {
-    const seededArray = getRandomMines(localSeed);
+    gameContext.playerSeed = localSeed;
+    const seed = parseInt(localSeed.toString().substring(3));
+    const seededArray = getRandomMines(seed);
     setMinesArray(seededArray);
     createNewGame(seededArray);
   }, []);
 
   const handleSubmission = (e: React.FormEvent) => {
     if (e) e.preventDefault();
+
     gameContext.playerSeed = localSeed;
-    const seededArray = getRandomMines(localSeed);
+    const seed = parseInt(localSeed.toString().substring(3));
+    const seededArray = getRandomMines(seed);
     setMinesArray(seededArray);
     createNewGame(seededArray);
   };
@@ -395,6 +397,7 @@ function Game() {
   return (
     <div className="game">
       <div className="seedEnter">
+        <p>Pelin numero</p>
         <input
           onChange={(e) => {
             setLocalSeed(parseInt(e.target.value));
