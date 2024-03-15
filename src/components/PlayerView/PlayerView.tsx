@@ -20,6 +20,7 @@ function Game() {
   const [grid, setGrid] = useState<GridCell[][]>([[]]);
   const [minesArray, setMinesArray] = useState<number[]>([]);
   const gameContext = useContext(GameContext);
+  const [localSeed, setLocalSeed] = useState<number>(gameContext.playerSeed);
   const [minesCards, setMinesCards] = useState<string[]>([]);
   const [ones, setOnes] = useState<string[]>([]);
   const [twos, setTwos] = useState<string[]>([]);
@@ -38,7 +39,7 @@ function Game() {
 
   const createNewBoard = (seededArr: number[]) => {
     const board: [GridCell[]] = [[]];
-    const minesArr = seededArr.length != 0 ? seededArr : getRandomMines(seed);
+    const minesArr = seededArr.length != 0 ? seededArr : getRandomMines(localSeed);
     setMinesArray(minesArr);
 
     for (let i = 0; i < WIDTH; ++i) {
@@ -378,14 +379,15 @@ function Game() {
   };
 
   useEffect(() => {
-    const seededArray = getRandomMines(gameContext.seed);
+    const seededArray = getRandomMines(localSeed);
     setMinesArray(seededArray);
     createNewGame(seededArray);
   }, []);
 
   const handleSubmission = (e: React.FormEvent) => {
     if (e) e.preventDefault();
-    const seededArray = getRandomMines(gameContext.seed);
+    gameContext.playerSeed = localSeed;
+    const seededArray = getRandomMines(localSeed);
     setMinesArray(seededArray);
     createNewGame(seededArray);
   };
@@ -395,14 +397,14 @@ function Game() {
       <div className="seedEnter">
         <input
           onChange={(e) => {
-            gameContext.seed = parseInt(e.target.value);
+            setLocalSeed(parseInt(e.target.value));
           }}
         />
         <br />
         <br />
         <Button onClick={handleSubmission}>Syötä koodi</Button>
       </div>
-      <div className="seedDisplay">{gameContext.seed}</div>
+      <div className="seedDisplay">{gameContext.playerSeed}</div>
       <br />
       <PlayerBoard
         grid={grid}

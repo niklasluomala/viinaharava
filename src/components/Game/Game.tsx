@@ -211,7 +211,7 @@ export default function Game() {
     const minesArray: number[] = [];
     const limit = WIDTH * HEIGHT;
     const minesPool = [...Array(limit).keys()];
-    let seed = gameContext.seed;
+    let seed = gameContext.dealerSeed;
 
     for (let i = 0; i < NUM_MINES; ++i) {
       const n = random(seed++) * minesPool.length;
@@ -389,12 +389,14 @@ export default function Game() {
     <div className="game">
       <div className="controls">
         <Button onClick={() => {
-            gameContext.seed = Math.floor(Math.random() * 1000000);
+            const rand = Math.floor(Math.random() * 1000000);
+            gameContext.dealerSeed = rand;
+            gameContext.playerSeed = rand;
             createNewGame([]);
           }}>Generoi</Button>
       </div>
       <br />
-      <div className="seedDisplay">{gameContext.seed}</div>
+      <div className="seedDisplay">{gameContext.dealerSeed}</div>
       <br />
       <Board
         grid={grid}
