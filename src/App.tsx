@@ -13,12 +13,14 @@ import SpecialsMarkdown from './specials.md';
 import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import React from 'react';
+
+import { GameProvider } from '@/GameContext';
+
 import { Button } from '@/components/ui/button';
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from '@/components/ui/card';
@@ -28,16 +30,19 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ThemeProvider } from '@/components/theme-provider/theme-provider';
+
+// Constants and types
+type Contributors = Map<string, string>;
+
+const GAME_VER = 'Viinaharava 0.4';
+const CONTRIBUTORS: Contributors = new Map<string, string>([
+  ['niklasluomala', 'https://github.com/niklasluomala'],
+  ['Loimaranta', 'https://github.com/Loimaranta'],
+  ['Jugebox', 'https://github.com/Jugebox'],
+  ['kovipu', 'https://github.com/kovipu'],
+]);
 
 function App() {
   const [thanks, setThanks] = useState('');
@@ -48,17 +53,7 @@ function App() {
   const [winCondition, setWinCondition] = useState('');
   const [specials, setSpecials] = useState('');
 
-  type Contributors = Map<string, string>;
-  type Rules = Map<string, string>;
-
-  const GAME_VER = 'Viinaharava 0.4';
-  const CONTRIBUTORS: Contributors = new Map<string, string>([
-    ['niklasluomala', 'https://github.com/niklasluomala'],
-    ['Loimaranta', 'https://github.com/Loimaranta'],
-    ['Jugebox', 'https://github.com/Jugebox'],
-    ['kovipu', 'https://github.com/kovipu'],
-  ]);
-  const RULES: Rules = new Map<string, string>([
+  const RULES = new Map<string, string>([
     ['Pelivälineet', requirements],
     ['Juomamäärät', drinks],
     ['Pelin valmistelu', gameSetup],
@@ -95,7 +90,8 @@ function App() {
     <>
       <div>
         <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
-          <Tabs defaultValue="rules">
+          <GameProvider>
+                      <Tabs defaultValue="rules">
             <TabsList className="w-full justify-between md:justify-center overflow-x-auto no-scrollbar">
               <TabsTrigger value="rules">Säännöt</TabsTrigger>
               <TabsTrigger value="playerView">Pelaajan näkymä</TabsTrigger>
@@ -138,7 +134,7 @@ function App() {
                             <AccordionItem value={key}>
                               <AccordionTrigger>{key}</AccordionTrigger>
                               <AccordionContent>
-                                <ReactMarkdown remarkPlugins={remarkGfm}>{value}</ReactMarkdown>
+                                <ReactMarkdown remarkPlugins={[remarkGfm]}>{value}</ReactMarkdown>
                               </AccordionContent>
                             </AccordionItem>
                           </div>
@@ -187,12 +183,13 @@ function App() {
                 </CardHeader>
                 <CardContent>
                   <div className="thanks">
-                    <ReactMarkdown remarkPlugins={remarkGfm}>{thanks}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{thanks}</ReactMarkdown>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
           </Tabs>
+          </GameProvider>
         </ThemeProvider>
       </div>
     </>
